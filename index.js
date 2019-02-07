@@ -1,21 +1,20 @@
-const TelegramBot = require('node-telegram-bot-api')
+'use strict';
 
-const TOKEN = '757109302:AAH8fJyA4MBNetHMP2nHVKGGgEzPwxmUrOA'
+const TelegramBot = require('node-telegram-bot-api'),
+  request = require('request'),
+  fs = require('fs'),
+  token = '757109302:AAH8fJyA4MBNetHMP2nHVKGGgEzPwxmUrOA',
+  bot = new TelegramBot(token, {polling:true});
 
-const bot = new TelegramBot(TOKEN, {polling: true})
+bot.on('message', function (msg) {
+  const id = msg.from.id;
 
+  if (msg.text === 'привет') {
+    bot.sendMessage(id, 'Приветсвуем на нашем канале')
+  }
 
-  require('http').createServer().listen(process.env.PORT || 5000).on('request', function(req, res){
-    res.end('')
-  })﻿
+  if (msg.text === '/info') {
+    bot.sendMessage(id, 'Тут вы можете посмотреть информацию')
+  }
 
-  bot.on('message', msg => {
-    bot.sendMessage(msg.chat.id, `Hello, glad to see you on KAC Group, ${msg.from.first_name}. Type "/info" to see information about company`)
-
-  });
-
-  bot.onText('/info', msg => {
-    const { chat: { id } } = msg
-    bot.sendMessage(id, 'KAC Group bla bla bla')
-
-})
+});
