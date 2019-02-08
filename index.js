@@ -11,20 +11,20 @@ const router = new Router();
 router.post('/bot', ctx => {
   console.log(ctx)
   ctx.status = 200
-})
+});
 
 app.use(router.routes())
 
 const port = config.get('port')
 app.listen(port, () => {
   console.log('Listening on ${port}')
-})
+});
 
 require('http').createServer().listen(process.env.PORT || 3000).on('request', function(request, res){
   res.end('')
   logger.request(req,res,error);
   print(logger);
-})
+});
 
 const TelegramBot = require('node-telegram-bot-api'),
   request = require('request'),
@@ -91,5 +91,5 @@ bot.on('callback_query', query => {
       Sale: _${result.sale}
       `;
     bot.sendMessage(id,md, {parse_mode: 'Markdown'});
-  })
+  });
 })
